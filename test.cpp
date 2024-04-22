@@ -1,35 +1,35 @@
 #include <bits/stdc++.h>
+#define ll long long
 using namespace std;
-const int INF = 0x2a2a2a2a;
-int dis[105][105], val[105][105];
-int n, m;
-int floyd() {
-    for (int i = 1; i <= n; ++i) {
-        for (int j = 1; j <= n; ++j) dis[i][j] = val[i][j];  //初始化最短路矩阵
+const int N = 1e5 + 5;
+int nex[N];
+char s1[N]; //文本串 
+char s2[N]; //模式串 
+int n, m;//文本串和模式串的长度 
+//下标从1开始
+void getnex() {
+    nex[1] = 0;
+    int i, j = 0;
+    for (i = 2; i <= m; i++) {
+        while (j > 0 && s2[j + 1] != s2[i])j = nex[j];
+        //如果回跳到第一个字符就不 用再回跳了
+        if (s2[j + 1] == s2[i])j++;
+        nex[i] = j;
     }
-    int ans = INF;
-    for (int k = 1; k <= n; ++k) {
-        for (int i = 1; i < k; ++i) {
-            for (int j = 1; j < i; ++j)
-                ans = min(ans, dis[i][j] + val[i][k] + val[k][j]);  //更新答案
-        }
-        for (int i = 1; i <= n; ++i) {
-            for (int j = 1; j <= n; ++j)
-                dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);  //floyd 更新最短路矩阵
-        }
-    }
-    return ans;
 }
-int main()
-{
-    memset(val, INF, sizeof(val));
-    cin >> n >> m;
-    while (m--) {
-        int u, v, w;
-        cin >> u >> v >> w;
-        val[u][v] = val[v][u] = w;
+int kmp() {
+    int i, j = 0;
+    getnex();
+    for (i = 1; i <= n; i++) {
+        while (s1[i] != s2[j + 1] && j > 0)j = nex[j];
+        //如果失配 ，那么就不断向回跳，直到可以继续匹配
+        if (s1[i] == s2[j + 1])j++;
+        //如果匹配成功，那么对应的模式串位置++ 
+        if (j == m) {
+            //输出所有出现位置的起始下标
+            printf("%d ", i - m + 1);
+            //注意下标，是从0还是1
+            j = nex[j];//继续匹配 
+        }
     }
-    int ans = floyd();
-    if (ans == INF) cout << "No solution.";
-    else cout << ans;
 }
