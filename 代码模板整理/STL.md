@@ -100,7 +100,71 @@ struct T1{//法二
 priority_queue<T1> q1; 
 ```
 
-## 其他
+## 6 tuple
+
+```cpp
+#include <tuple>
+auto t = std::make_tuple(1, 2.5, "Hello");
+
+// get 获取元素
+auto t = std::make_tuple(1, 2.5, "Hello");
+int i = std::get<0>(t); // 1
+double d = std::get<1>(t); // 2.5
+const char* s = std::get<2>(t); // "Hello"
+
+// tie 解包获取元素 
+int i;
+double d;
+const char* s;
+
+auto t = std::make_tuple(1, 2.5, "Hello");
+std::tie(i, d, s) = t;
+
+// size 获取size
+auto t = std::make_tuple(1, 2.5, "Hello");
+constexpr size_t size = std::tuple_size<decltype(t)>::value; // 3
+
+// tuple_element 获取某个元素的类型
+auto t = std::make_tuple(1, 2.5, "Hello");
+using FirstType = std::tuple_element<0, decltype(t)>::type; // int
+using SecondType = std::tuple_element<1, decltype(t)>::type; // double
+
+// tuple_cat 连接多个tuple
+auto t1 = std::make_tuple(1, 2.5);
+auto t2 = std::make_tuple("Hello", 'a');
+auto t3 = std::tuple_cat(t1, t2); // t3 is std::tuple<int, double, const char*, char>
+
+// apply 将tuple中的元素作为参数传递给一个函数
+void print(int i, double d, const char* s) {
+    std::cout << i << ", " << d << ", " << s << std::endl;
+}
+
+auto t = std::make_tuple(1, 2.5, "Hello");
+std::apply(print, t); // 1, 2.5, Hello
+
+// for_each + index_sequence 遍历并使用元素
+template<typename Tuple, std::size_t... I>
+void print_tuple(const Tuple& t, std::index_sequence<I...>) {
+    ((std::cout << (I == 0 ? "" : ", ") << std::get<I>(t)), ...);
+    std::cout << std::endl;
+}
+
+template<typename... Args>
+void print_tuple(const std::tuple<Args...>& t) {
+    print_tuple(t, std::index_sequence_for<Args...>{});
+}
+
+int main() {
+    auto t = std::make_tuple(1, 2.5, "Hello");
+    print_tuple(t); // 1, 2.5, Hello
+    return 0;
+}
+
+```
+
+## 二分
+
+由于 set 迭代器是单向的，所以一般情况下 std::set.lower_bound() 的性能要优于 std::lower_bound()
 
 ```cpp
 lower_bound(begin,end,num)：二分查找第一个大于或等于 num 的数字，找到返回该数字的地址，不存在则返回 end
