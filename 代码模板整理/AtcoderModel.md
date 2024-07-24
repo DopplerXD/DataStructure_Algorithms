@@ -1,4 +1,4 @@
-## atcoder 快速模乘等封装
+## atcoder 快速模乘封装
 
 https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp
 
