@@ -3,8 +3,7 @@
 ## 1 乘法取模
 
 ```cpp
-ll mul(ll a, ll b, ll m)
-{
+ll mul(ll a, ll b, ll m) {
     a = a % m, b = b % m;
     ll res = 0;
     while (b > 0) {
@@ -16,11 +15,10 @@ ll mul(ll a, ll b, ll m)
 }
 ```
 
-## 2 快速幂取模 fastPow(a, n, m) = (a^n)%m
+## 2 快速幂取模
 
 ```cpp
-ll fastPow(ll a, ll n, ll mod) // (a^n)%m
-{
+ll fastPow(ll a, ll n, ll mod) { // (a^n)%m
     ll ans = 1;
     a %= mod;
     while (n) {
@@ -465,7 +463,7 @@ for (int i : p) if (~i) {
 }
 ```
 
-## 19 预处理组合数 复杂度 $O(n^2)$
+## 19 预处理组合数
 
 ```cpp
 for (int i = 0; i <= 5000; i++) {

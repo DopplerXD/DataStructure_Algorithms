@@ -298,4 +298,17 @@ int main()
 }
 ```
 
-## 
+## 9 求最大子段和
+
+```cpp
+int dp[N], a[N], ans = 0;
+memset(dp, 0, sizeof(dp));
+for(int i = 1; i <= n; i++) {
+	if(dp[i - 1] > 0)
+		dp[i] = dp[i - 1] + a[i];
+	else
+		dp[i] = a[i];
+	ans = max(ans, dp[i]);
+}
+```
+

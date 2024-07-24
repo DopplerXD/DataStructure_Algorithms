@@ -1,6 +1,6 @@
 # 字符串
 
-## 1 manacher 求最长回文子串
+## 1 manacher
 
 ```cpp
 // 复杂度 O(n)
@@ -693,7 +693,7 @@ bool isPalindrome_odd(int l, int r) { // 长度为奇数
 }
 ```
 
-## 9 回文自动机 PAM （回文树）
+## 9 回文自动机 PAM（回文树）
 
 ```cpp
 struct PalindromeAutomaton {

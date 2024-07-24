@@ -1,6 +1,6 @@
 # 计算几何专题
 
-## 封装
+## 点线多边形封装
 
 ```cpp
 const double pi = acos(-1.0);

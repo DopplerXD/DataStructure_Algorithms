@@ -1,4 +1,4 @@
-# 基础算法
+# 基础/杂项
 
 ## 1 快读快写
 
@@ -35,8 +35,6 @@ void write(int x) {
 }
 ```
 
-
-
 ## 2 二分
 
 ```cpp
@@ -57,8 +55,6 @@ int binarySearch(int left, int right, int x) {
     return -1;
 }
 ```
-
-
 
 ## 3 三分
 
@@ -91,8 +87,6 @@ int main()
 }
 ```
 
-
-
 ## 4 字符串与其他类型转换
 
 ```cpp
@@ -107,25 +101,7 @@ long long b = stoll(s, 0, x);
 stoull stold stod 同理
 ```
 
-
-
-## 5 动态规划求最大子段和
-
-```cpp
-int dp[N], a[N], ans = 0;
-memset(dp, 0, sizeof(dp));
-for(int i = 1; i <= n; i++) {
-	if(dp[i - 1] > 0)
-		dp[i] = dp[i - 1] + a[i];
-	else
-		dp[i] = a[i];
-	ans = max(ans, dp[i]);
-}
-```
-
-
-
-## 6 bitset
+## 5 bitset
 
 ```cpp
 构造方法
@@ -190,7 +166,24 @@ cout << (foo|bar) << endl;        // 0111 （按位或，不赋值）
 cout << (foo^bar) << endl;        // 0101 （按位异或，不赋值）
 ```
 
+## 6 归并排序求逆序对数
 
+```cpp
+int tmp[N];
+void mergeSort(int l, int r, std::vector<int>& a, int& ans) {
+    if (l >= r) return;
+    int mid = (l + r) >> 1, i = l, j = mid + 1, cnt = 0;
+    mergeSort(l, mid, a, ans);
+    mergeSort(mid + 1, r, a, ans);
+    while (i <= mid || j <= r)
+        if (j > r || (i <= mid && a[i] <= a[j]))
+            tmp[cnt++] = a[i++];
+        else
+            tmp[cnt++] = a[j++], ans += mid - i + 1;
+    for (int k = 0; k < r - l + 1; k++)
+        a[l + k] = tmp[k];
+}
+```
 
 ## 7 结构体重载比较运算符
 
@@ -200,8 +193,6 @@ struct node {
 	bool operator>(const node& a) const { return dis > a.dis; }
 };
 ```
-
-
 
 ## 8 对顶堆
 
@@ -242,8 +233,6 @@ int main()
 }
 ```
 
-
-
 ## 9 vector 去重
 
 ```cpp
@@ -259,8 +248,6 @@ sort(a.begin(), a.end());
 a.erase(unique(a.begin(), a.end()), a.end());
 ```
 
-
-
 ## 10 iota 生成连续数序列
 
 ```cpp
@@ -269,8 +256,6 @@ vector<int> v(n);
 iota(v.begin(), v.end(), 1);
 // 生成 1-n
 ```
-
-
 
 ## 11 sort 中使用 lambda 编写排序规则
 
@@ -284,8 +269,6 @@ sort(q.begin(), q.end(),
             return v[i] < v[j] || (v[i] == v[j] && i < j);
         });
 ```
-
-
 
 ## 12 滑动窗口
 
@@ -307,8 +290,6 @@ void solve() {
 	}
 }
 ```
-
-
 
 ## 13 双向广搜
 
@@ -389,8 +370,6 @@ int main()
 }
 ```
 
-
-
 ## 14 单调栈
 
 ```cpp
@@ -412,9 +391,7 @@ int main() {
 }
 ```
 
-
-
-## 15 全排列函数
+## 15 全排列函数 permutation
 
 ```cpp
 int n;
@@ -430,16 +407,12 @@ do {
 } while (next_permutation(a.begin(), a.end()));
 ```
 
-
-
 ## 16 判断非递减 is_sorted
 
 ```cpp
 //a 数组 [start,end) 区间是否是非递减的，返回 bool 型
 cout << is_sorted(a + start, a + end);
 ```
-
-
 
 ## 17 cout 输出流控制
 
@@ -448,8 +421,6 @@ stew(x) 补全 x 位输出，默认用空格补全
 setfill(char) 设定补全类型
 cout << setw(12) << setfill('*') << 12 << endl;
 ```
-
-
 
 ## 18 日期换算（基姆拉尔森公式）
 
@@ -460,8 +431,6 @@ int week(int y,int m,int d){
     return (d+2*m+3*(m+1)/5+y+y/4-y/100+y/400)%7+1;
 }
 ```
-
-
 
 ## 19 __int128_t
 
@@ -484,8 +453,6 @@ void write(i128 x) {
 }
 ```
 
-
-
 ## 20 利用 auto + lambda + 引用捕获在内部编写递归函数
 
 ```cpp
@@ -503,28 +470,7 @@ auto dfs = [&](auto&& self, int u, int f) -> void {
 dfs(dfs, 1, 0);
 ```
 
-
-
-## 21 归并排序求逆序对数
-
-```cpp
-int tmp[N];
-void mergeSort(int l, int r, std::vector<int>& a, int& ans) {
-    if (l >= r) return;
-    int mid = (l + r) >> 1, i = l, j = mid + 1, cnt = 0;
-    mergeSort(l, mid, a, ans);
-    mergeSort(mid + 1, r, a, ans);
-    while (i <= mid || j <= r)
-        if (j > r || (i <= mid && a[i] <= a[j]))
-            tmp[cnt++] = a[i++];
-        else
-            tmp[cnt++] = a[j++], ans += mid - i + 1;
-    for (int k = 0; k < r - l + 1; k++)
-        a[l + k] = tmp[k];
-}
-```
-
-## 22 火车头卡常
+## 21 火车头卡常
 
 ```cpp
 #pragma GCC optimize("O2")
