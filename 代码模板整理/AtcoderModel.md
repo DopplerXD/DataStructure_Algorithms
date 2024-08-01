@@ -1,8 +1,8 @@
 ## atcoder 快速模乘封装
 
-https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp
+[internal_math封装源代码地址-atcoder github](https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp)
 
-https://github.com/atcoder/ac-library/blob/master/atcoder/modint.hpp
+[modint封装源代码地址-atcoder github](https://github.com/atcoder/ac-library/blob/master/atcoder/modint.hpp)
 
 非常量取模时使用高效的模乘算法可以得到更快的运行效率，例如 barrett reduction (atcoder::dynamic_modint 使用了这一算法)
 
